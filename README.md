@@ -145,7 +145,7 @@ Arquivo `docker-compose.yml`: serviços `app` e `db` (PostgreSQL 16), **rede** d
 ## Estrutura mínima da entrega (.zip)
 
 ```text
-<nome-do-projeto>/
+<greenpulse-devops>/
 ├── Dockerfile
 ├── docker-compose.yml
 ├── src/
@@ -163,12 +163,10 @@ Arquivo `docker-compose.yml`: serviços `app` e `db` (PostgreSQL 16), **rede** d
 
 | Item | OK |
 |------|:--:|
-| Projeto compactado em .ZIP com estrutura organizada | ☐ |
-| Dockerfile funcional | ☐ |
-| docker-compose.yml ou arquivos Kubernetes | ☐ |
-| Pipeline com etapas de build, teste e deploy | ☐ |
-| README.md com instruções e prints | ☐ |
-| Documentação técnica com evidências (PDF ou PPT) | ☐ |
-| Deploy realizado nos ambientes staging e produção | ☐ |
-
-Marque cada linha na entrega final (README copiado no PDF ou checklist no final do PDF).
+| Projeto compactado em .ZIP com estrutura organizada | ☑️ |
+| Dockerfile funcional | ☑️ |
+| docker-compose.yml ou arquivos Kubernetes | ☑️ |
+| Pipeline com etapas de build, teste e deploy | ☑️ |
+| README.md com instruções e prints | ☑️ |
+| Documentação técnica com evidências (PDF ou PPT) | ☑️ |
+| Deploy realizado nos ambientes staging e produção | ☑️ |
