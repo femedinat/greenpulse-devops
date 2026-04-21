@@ -1,0 +1,49 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: greenpulse-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-staging}
+      SERVER_PORT: ${SERVER_PORT:-8080}
+      DB_HOST: db
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME:-greenpulse}
+      DB_USER: ${DB_USER:-greenpulse}
+      DB_PASSWORD: ${DB_PASSWORD:-greenpulse123}
+    ports:
+      - "${SERVER_PORT:-8080}:${SERVER_PORT:-8080}"
+    networks:
+      - greenpulse-network
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    container_name: greenpulse-db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-greenpulse}
+      POSTGRES_USER: ${DB_USER:-greenpulse}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-greenpulse123}
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - greenpulse-db-data:/var/lib/postgresql/data
+    networks:
+      - greenpulse-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-greenpulse} -d ${DB_NAME:-greenpulse}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+networks:
+  greenpulse-network:
+    driver: bridge
+
+volumes:
+  greenpulse-db-data:
